@@ -1,26 +1,23 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Container } from "react-bootstrap";
-import AddVisit from "./visits/AddVisit";
+import { Container, Navbar, Nav } from "react-bootstrap";
+import PhonesView from "./phones/PhonesView";
 
 class Home extends Component {
   render() {
     return (
       <div>
+        <Navbar>
+          <Navbar.Brand>
+            <Nav.Link href="/" id="navlink-home">HOME</Nav.Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse className="justify-content-end">
+            <Nav.Link href="/login" id="navlink-login">Login</Nav.Link>
+            <Nav.Link href="/signup" id="navlink-signup">Sign up</Nav.Link>
+          </Navbar.Collapse>
+        </Navbar>
         <Container>
-          <h1 className="mt-4" id="home-title">Home</h1>
-          <p>
-            <Link to="/login/" id="login-link">Login</Link>
-          </p>
-          <p>
-            <Link to="/signup" id="signup-link">Sign up</Link>
-          </p>
-          <p>
-            <Link to="/dashboard" id="dashboard-link">Dashboard</Link>
-          </p>
-        </Container>
-        <Container>
-          <AddVisit />
+          <PhonesView isLogged={false} />
         </Container>
       </div>
     );

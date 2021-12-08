@@ -1,13 +1,13 @@
 import axios from "axios";
 import { toastOnError } from "../../utils/Utils";
-import { GET_VISITS, ADD_VISIT } from "./VisitsTypes";
+import { GET_PHONES, ADD_PHONE } from "./PhonesTypes";
 
-export const getVisits = (startDate = "", endDate = "") => dispatch => {
+export const getPhones = (brand = "", os = "", hasOffer = "") => dispatch => {
   axios
-    .get(`/api/v1/visits/?start_date=${startDate}&end_date=${endDate}`)
+    .get(`/api/v1/phones/?brand=${brand}&os=${os}&hasOffer=${hasOffer}`)
     .then(response => {
       dispatch({
-        type: GET_VISITS,
+        type: GET_PHONES,
         payload: response.data
       });
     })
@@ -16,12 +16,12 @@ export const getVisits = (startDate = "", endDate = "") => dispatch => {
     });
 };
 
-export const addVisit = visit => dispatch => {
+export const addPhone = phone => dispatch => {
   axios
-    .post("/api/v1/visits/", visit)
+    .post("/api/v1/phones/", phone)
     .then(response => {
       dispatch({
-        type: ADD_VISIT,
+        type: ADD_PHONE,
         payload: response.data
       });
     })

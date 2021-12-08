@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { logout } from "../login/LoginActions";
-import VisitsView from "../visits/VisitsView";
+import PhonesView from "../phones/PhonesView";
 
 class Dashboard extends Component {
   onLogout = () => {
@@ -18,7 +18,8 @@ class Dashboard extends Component {
       <div>
         <Navbar>
           <Navbar.Brand>
-            <Nav.Link href="/" id="navlink-home">HOME</Nav.Link></Navbar.Brand>
+            <Nav.Link href="/" id="navlink-home">HOME</Nav.Link>
+          </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
@@ -28,7 +29,7 @@ class Dashboard extends Component {
           </Navbar.Collapse>
         </Navbar>
         <Container id="dashboard-container">
-          <VisitsView />
+          <PhonesView isLogged={user?.username}/>
         </Container>
       </div>
     );
