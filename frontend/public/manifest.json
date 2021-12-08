@@ -1,6 +1,6 @@
 {
-  "short_name": "Visit App",
-  "name": "Create React+Django Visit App",
+  "short_name": "Phone App",
+  "name": "Create React+Django Phone App",
   "icons": [
     {
       "src": "favicon.ico",
