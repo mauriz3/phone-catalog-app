@@ -29,7 +29,7 @@ class PhoneViewMore extends Component {
     const phone = this.props.phone;
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} id={"more-button-" + phone.name.replace(" ", "-").toLowerCase()}>
           More
         </Button>
 
@@ -37,7 +37,7 @@ class PhoneViewMore extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered>
           <Modal.Header closeButton>
-            <Modal.Title>{phone.name}</Modal.Title>
+            <Modal.Title id="modal-title">{phone.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row>
