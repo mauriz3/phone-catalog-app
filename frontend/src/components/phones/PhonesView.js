@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { getPhones } from "./PhonesActions";
-import { Button, Form, Row, Col, FloatingLabel } from "react-bootstrap";
+import { Button, Form, Row, Col, FloatingLabel, Spinner } from "react-bootstrap";
 import PhoneCard from "./PhoneCard";
 
 class PhonesView extends Component {
@@ -39,7 +39,13 @@ class PhonesView extends Component {
 
     function Content() {
       if (phones.length === 0) {
-        return <h2 className="mt-3">Data not found</h2>
+        return (<Row className="justify-content-center mt-5 pt-5">
+          <Col xs="2" className="mt-5 pt-5">
+            <Spinner animation="border" role="status" variant="white">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </Col>
+        </Row>)
       }
       return (<Row className="my-2">
         {items}
