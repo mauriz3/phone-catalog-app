@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getVisits } from "./VisitsActions";
-import { Button, Card, Form, Row, Col } from "react-bootstrap";
-import VisitCard from "./VisitCard";
-import VisitChart from "./VisitChart";
-import VisitsTable from "./VisitsTable";
+import { getPhones } from "./PhonesActions";
+// import { Button, Form, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import PhoneCard from "./PhoneCard";
 import moment from 'moment';
 
 const today = new Date()
@@ -14,7 +13,7 @@ const yesterday = new Date(today).setDate(today.getDate() - 1)
 const todayDateString = moment(today).format('YYYY-MM-DD');
 const yesterdayDateString = moment(yesterday).format('YYYY-MM-DD');
 
-class VisitsView extends Component {
+class PhonesView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,26 +25,33 @@ class VisitsView extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   onFilterClick = () => {
-    this.props.getVisits(this.state.startDate, this.state.endDate);
+    this.props.getPhones();
   };
   componentDidMount() {
     this.onFilterClick();
   };
 
   render() {
-    const { rawVisits } = this.props.visits;
-    const { newVisits } = this.props.visits;
-    const { recurrentVisits } = this.props.visits;
-    const { visitsFormattedByOSs } = this.props.visits;
-    const { visitsFormattedByBrowsers } = this.props.visits;
+    const { phones } = this.props.phones;
+    const isLogged = this.props.isLogged;
+    // const { newVisits } = this.props.visits;
+    // const { recurrentVisits } = this.props.visits;
 
-    if (rawVisits.length === 0) {
+    if (phones.length === 0) {
       return <h2 className="mt-3">Data not found</h2>;
     }
 
+    let items = phones.map(phone => {
+      return (
+        <Col sm="6" lg="4" className="my-3" key={phone.id}>
+          <PhoneCard phone={phone} isLogged={isLogged} />
+        </Col>
+      );
+    });
+
     return (
       <div>
-        <Form className="mt-4">
+        {/* <Form className="mt-4">
           <Row className="justify-content-end">
             <Col xs="6" md="4" lg="3">
               <Form.Group as={Row}>
@@ -79,56 +85,25 @@ class VisitsView extends Component {
               </Button>
             </Col>
           </Row>
-        </Form>
+        </Form> */}
         <Row className="my-3">
-          <Col sm="4">
-            <VisitCard header="Total Visits" title={newVisits + recurrentVisits} />
-          </Col>
-          <Col sm="4">
-            <VisitCard header="New Visits" title={newVisits} />
-          </Col>
-          <Col sm="4">
-            <VisitCard header="Recurrent Visits" title={recurrentVisits} />
-          </Col>
+          {items}
         </Row>
-        <Row>
-          <Col lg="6">
-            <Card
-              border=""
-              className="mb-2"
-            >
-              <Card.Header>Operative Systems</Card.Header>
-              <Card.Body>
-                <VisitChart area={false} data={visitsFormattedByOSs} />
-              </Card.Body>
-            </Card>
-          </Col>
-          <Col lg="6">
-            <Card
-              className="mb-2"
-            >
-              <Card.Header>Browsers</Card.Header>
-              <Card.Body>
-                <VisitChart area={true} data={visitsFormattedByBrowsers} />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <VisitsTable visits={rawVisits} />
       </div>
     );
   }
 }
 
-VisitsView.propTypes = {
-  getVisits: PropTypes.func.isRequired,
-  visits: PropTypes.object.isRequired
+PhonesView.propTypes = {
+  getPhones: PropTypes.func.isRequired,
+  phones: PropTypes.object.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
-  visits: state.visits
+  phones: state.phones
 });
 
 export default connect(mapStateToProps, {
-  getVisits
-})(withRouter(VisitsView));
+  getPhones
+})(withRouter(PhonesView));
