@@ -33,6 +33,7 @@ class PhonesView extends Component {
 
   render() {
     const { phones } = this.props.phones;
+    const isLogged = this.props.isLogged;
     // const { newVisits } = this.props.visits;
     // const { recurrentVisits } = this.props.visits;
 
@@ -42,8 +43,8 @@ class PhonesView extends Component {
 
     let items = phones.map(phone => {
       return (
-        <Col sm="4" className="my-3">
-          <PhoneCard  phoneName={phone.name} price={phone.price} hasOffer={phone.hasOffer} offerPrice={phone.offerPrice} image={phone.image} />
+        <Col sm="6" lg="4" className="my-3" key={phone.id}>
+          <PhoneCard phone={phone} isLogged={isLogged} />
         </Col>
       );
     });
@@ -95,7 +96,8 @@ class PhonesView extends Component {
 
 PhonesView.propTypes = {
   getPhones: PropTypes.func.isRequired,
-  phones: PropTypes.object.isRequired
+  phones: PropTypes.object.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({

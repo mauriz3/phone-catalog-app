@@ -20,6 +20,7 @@ class PhoneSerializer(serializers.ModelSerializer):
             "color",
             "screen",
             "processor",
+            "ram",
             "camera",
             "price",
             "offerPrice",
