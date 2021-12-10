@@ -39,7 +39,7 @@ class PhoneCard extends Component {
     const phone = this.props.phone;
     return (
       <div>
-        <Card style={{ 'min-height': '550px' }}>
+        <Card style={{ 'minHeight': '550px' }}>
           <Card.Header className="text-center">{phone.name}</Card.Header>
           <Card.Body>
             <Row className="my-2">
