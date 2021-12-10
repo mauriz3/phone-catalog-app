@@ -37,7 +37,6 @@ function ActionButtons(props) {
 class PhoneCard extends Component {
   render() {
     const phone = this.props.phone;
-    console.log('phone', phone)
     return (
       <div>
         <Card style={{ 'min-height': '550px' }}>

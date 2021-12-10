@@ -7,10 +7,7 @@ describe("Home page tests", () => {
   const baseURL = `http://${debug ? '127.0.0.1:3000' : '0.0.0.0'}/`;
 
   beforeAll(async () => {
-    browser = await puppeteer.launch({
-      headless: debug ? false : true,
-      slowMo: debug ? 150 : 0 // slow down by 150ms
-    });
+    browser = await puppeteer.launch();
     page = await browser.newPage();
   });
 

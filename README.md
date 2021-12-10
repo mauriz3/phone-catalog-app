@@ -1,4 +1,4 @@
-# MMR:phone-catalog-app (WIP)
+# MMR:phone-catalog-app
 Django + React phone catalog app.
 
 ## Docker
