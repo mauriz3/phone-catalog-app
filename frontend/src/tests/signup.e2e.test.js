@@ -3,7 +3,7 @@ import puppeteer from "puppeteer";
 describe("Signup tests", () => {
   let browser;
   let page;
-  const debug = false;;
+  const debug = false;
   const baseURL = `http://${debug ? '127.0.0.1:3000' : '0.0.0.0'}/signup`;
 
   beforeAll(async () => {
