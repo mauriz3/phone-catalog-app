@@ -29,7 +29,7 @@ class PhoneViewMore extends Component {
     const phone = this.props.phone;
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow} id={"more-button-" + phone.name.replace(" ", "-").toLowerCase()}>
           More
         </Button>
 
@@ -37,7 +37,7 @@ class PhoneViewMore extends Component {
           aria-labelledby="contained-modal-title-vcenter"
           centered>
           <Modal.Header closeButton>
-            <Modal.Title>{phone.name}</Modal.Title>
+            <Modal.Title id="modal-title">{phone.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Row>
@@ -56,7 +56,7 @@ class PhoneViewMore extends Component {
                 </Card>
               </Col>
               <Col>
-                <Image src={phone.image ? phone.image : 'mobile.png'} fluid style={{ height: '430px' }} />
+                <Image src={phone.image ? phone.image.replace("/media/phones", ":8000/media/phones") : 'mobile.png'} fluid style={{ height: '430px' }} />
               </Col>
             </Row>
             <Row>

@@ -39,7 +39,7 @@ class PhoneCard extends Component {
     const phone = this.props.phone;
     return (
       <div>
-        <Card style={{ 'min-height': '550px' }}>
+        <Card style={{ 'minHeight': '550px' }}>
           <Card.Header className="text-center">{phone.name}</Card.Header>
           <Card.Body>
             <Row className="my-2">
@@ -56,7 +56,7 @@ class PhoneCard extends Component {
                 </Card>
               </Col>
               <Col>
-                <Image src={phone.image ? phone.image : 'mobile.png'} fluid />
+                <Image src={phone.image ? phone.image.replace("/media/phones", ":8000/media/phones") : 'mobile.png'} fluid />
               </Col>
             </Row>
             <Row className="justify-content-center mt-4">

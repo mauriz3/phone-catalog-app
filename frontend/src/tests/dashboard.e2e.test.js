@@ -3,7 +3,7 @@ import puppeteer from "puppeteer";
 describe("Dashboard page tests", () => {
   let browser;
   let page;
-  const debug = false;
+  const debug = false;;
   const baseURL = `http://${debug ? '127.0.0.1:3000' : '0.0.0.0'}/`;
 
   beforeAll(async () => {
@@ -24,21 +24,23 @@ describe("Dashboard page tests", () => {
     expect(text).toContain("testUser");
   });
 
-  test("Get Totals visits before go home and go home", async () => {
-    await page.waitForSelector("#total-visits");
-    const visitsBeforeGoHome = await page.$eval("#total-visits", (e) => e.textContent);
-    await page.click('#navlink-home')
-    await page.waitForSelector("#home-title");
-    await page.goto(baseURL + 'dashboard');
+
+  test("phone modal can be open and closed", async () => {
+    await page.setViewport({ width: 2000, height: 768});
     await page.waitForSelector("#navbar-username");
-    await page.waitForSelector("#total-visits");
-    const visitsAfterGoHome = await page.$eval("#total-visits", (e) => e.textContent);
-    expect(visitsAfterGoHome).toContain(Number(visitsBeforeGoHome) + 1);
+    let selector = "div.justify-content-center.mt-4.row > div > button";
+    await page.waitForSelector(selector);
+    await page.click(selector);
+    await page.waitForSelector("#modal-title");
+    selector = "div.modal-header > button"
+    await page.waitForSelector(selector);
+    await page.click(selector);
+    await page.waitForSelector("#navbar-username");
   });
 
   test("click on logout redirects to the home", async () => {
     await page.click('#navlink-logout')
-    await page.waitForSelector("#home-title");
+    await page.waitForSelector("#navlink-login");
   });
 
   afterAll(() => browser.close());
